@@ -2,6 +2,6 @@
 
 @section('content')
 
-  <h1>Edit posts page</h1>
+  <h1>Create Post page</h1>
 
 @stop
