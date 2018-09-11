@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Comment;
-// use App\Photo;
+use App\Post;
 use App\User;
 use App\Http\Requests;
 
@@ -67,7 +67,11 @@ class PostCommentsController extends Controller
      */
     public function show($id)
     {
-        //
+      $post = Post::findOrFail($id);
+
+      $comments = $post->comments;
+
+      return view('admin.comments.show', compact('comments'));
     }
 
     /**
@@ -92,7 +96,7 @@ class PostCommentsController extends Controller
     {
         Comment::findOrFail($id)->update($request->all());
 
-        return redirect('/admin/comments');
+        return redirect()->back();
     }
 
     /**
