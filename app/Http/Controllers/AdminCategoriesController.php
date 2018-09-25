@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Http\Requests;
+use App\Http\Requests\CategoriesCreateRequest;
 
 class AdminCategoriesController extends Controller
 {

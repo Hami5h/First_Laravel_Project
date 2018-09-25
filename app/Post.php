@@ -2,21 +2,16 @@
 
 namespace App;
 
-use Cviebrock\EloquentSluggable\Sluggable;
+// use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+// use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 
 class Post extends Model
 {
 
-  public function sluggable() {
-    return [
-      'slug' => [
-        'source'         => 'title',
-        'separator'      => '-',
-        'includeTrashed' => true,
-      ]
-    ];
-  }
+// use Sluggable;
+// use SluggableScopeHelpers;
+
 
   protected $fillable = [
     'category_id',
@@ -25,6 +20,14 @@ class Post extends Model
     'body',
     'slug'
   ];
+
+  // public function sluggable() {
+  //   return [
+  //     'slug' => [
+  //       'source' => 'title'
+  //     ]
+  //   ];
+  // }
 
   public function user(){
     return $this->belongsTo('App\User');
