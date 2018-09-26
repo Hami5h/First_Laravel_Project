@@ -32,6 +32,6 @@ class DatabaseSeeder extends Seeder
           $comment->replies()->save(factory(App\CommentReply::class)->make());
         });
 
-        // $this->call(UsersTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
     }
 }
