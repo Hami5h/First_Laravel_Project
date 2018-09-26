@@ -4,7 +4,7 @@
 
   @if(Session::has('deleted_image'))
 
-  <p class="bg-danger">{{session('deleted_image')}}</p>
+    <p class="bg-danger">{{session('deleted_image')}}</p>
 
   @endif
 
@@ -12,36 +12,69 @@
 
   @if($photos)
 
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Id</th>
-          <th>Name</th>
-          <th>Created date</th>
-        </tr>
-      </thead>
+    <form action="delete/media" method="post" class="form-inline">
 
-      <tbody>
-        @foreach ($photos as $photo)
+      {{csrf_field()}}
+      {{method_field('delete')}}
+
+      <div class="form-group" >
+        <select name="checkBoxArray" class="form-control">
+          <option value="">Delete</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <input type="submit" name="delete_all" class="btn-primary">
+      </div>
+
+
+      <table class="table">
+        <thead>
           <tr>
-            <td>{{$photo->id}}</td>
-            <td><img height="50" src="{{$photo->file}}" alt=""></td>
-            <td>{{$photo->created_at ? $photo->created_at->diffForHumans() : 'No date'}}</td>
-            <td>
-              {!! Form::open(['method' => 'DELETE',
-                'action' => ['AdminMediasController@destroy', $photo->id]]) !!}
-
-                <div class="form-group">
-                  {!! Form::submit('Delete Image', ['class' => 'btn btn-danger col-sm-6']) !!}
-                </div>
-
-                {!! Form::close() !!}
-            </td>
+            <th><input type="checkbox" id="options"></th>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Created date</th>
           </tr>
-        @endforeach
-      </tbody>
-    </table>
+        </thead>
 
-  @endif
+        <tbody>
+          @foreach ($photos as $photo)
+            <tr>
+              <td><input class="checkBoxes" type="checkbox" name="checkBoxArray[]" value="{{$photo->id}}"></td>
+              <td>{{$photo->id}}</td>
+              <td><img height="50" src="{{$photo->file}}" alt=""></td>
+              <td>{{$photo->created_at ? $photo->created_at->diffForHumans() : 'No date'}}</td>
+              <td>
+                <input type="hidden" name="photo" value="{{$photo->id}}">
+                {{-- <div class="form-group">
+                  <input type="submit" name="delete_single" value="Delete" class="btn btn-danger">
+                </div> --}}
+              </td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </form>
+    @endif
 
-@stop
+
+
+  @stop
+
+  @section('scripts')
+    <script>
+    $(document).ready(function(){
+      $('#options').click(function(){
+        if(this.checked) {
+          $('.checkBoxes').each(function(){
+            this.checked = true;
+          });
+        }else{
+          $('.checkBoxes').each(function(){
+            this.checked = false;
+          });
+        }
+      });
+    });
+    </script>
+  @stop
