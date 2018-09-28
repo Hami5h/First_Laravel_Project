@@ -28,7 +28,7 @@ Route::group(['middleware' => 'admin'], function() {
     'edit'   => 'admin.users.edit',
     ]]);
 
-    route::get('/post/{id}', ['as' => 'home.post', 'uses' => 'AdminPostsController@post']);
+    route::get('/post/{id}', ['as' => 'home.post', 'uses' => 'HomeController@post']);
 
     Route::resource('admin/posts', 'AdminPostsController', ['names' => [
       'index'  => 'admin.posts.index',

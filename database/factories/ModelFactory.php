@@ -57,7 +57,7 @@ $factory->define(App\Category::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Photo::class, function (Faker\Generator $faker) {
   return [
-    'file' => 'placeholder.jpg'
+    'file' => 'image_0.jpg'
   ];
 });
 
